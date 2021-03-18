@@ -1,53 +1,33 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sample_block_flutter_app/block/CounterBlock.dart';
-
-class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onCreate(Cubit cubit) {
-    super.onCreate(cubit);
-    print('onCreate -- cubit: ${cubit.runtimeType}');
-  }
-
-  @override
-  void onEvent(Bloc bloc, Object event) {
-    super.onEvent(bloc, event);
-    print('onEvent -- bloc: ${bloc.runtimeType}, event: $event');
-  }
-
-  @override
-  void onChange(Cubit cubit, Change change) {
-    super.onChange(cubit, change);
-    print('onChange -- cubit: ${cubit.runtimeType}, change: $change');
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print('onTransition -- bloc: ${bloc.runtimeType}, transition: $transition');
-  }
-
-  @override
-  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
-    print('onError -- cubit: ${cubit.runtimeType}, error: $error');
-    super.onError(cubit, error, stackTrace);
-  }
-
-  @override
-  void onClose(Cubit cubit) {
-    super.onClose(cubit);
-    print('onClose -- cubit: ${cubit.runtimeType}');
-  }
-}
+import 'package:sample_block_flutter_app/block/CounterCubit.dart';
+import 'package:sample_block_flutter_app/block/SimpleBlocObserver.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
-
   cubitMain();
   blocMain();
+  runApp(MyApp());
 }
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Cubit',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Scaffold(body:  Center(child: Text("hel;loo"))),
 
+    );
+  }
+}
 void cubitMain() {
   print('----------CUBIT----------');
 
@@ -90,14 +70,4 @@ void blocMain() async {
   await bloc.close();
 }
 
-/// A `CounterCubit` which manages an `int` as its state.
-class CounterCubit extends Cubit<int> {
-  /// The initial state of the `CounterCubit` is 0.
-  CounterCubit() : super(0);
-
-  /// When increment is called, the current state
-  /// of the cubit is accessed via `state` and
-  /// a new `state` is emitted via `emit`.
-  void increment() => emit(state + 1);
-}
 
