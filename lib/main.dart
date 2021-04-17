@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(body:  Center(child: Text("helloo"))),
 
     );
+    
   }
 }
 void cubitMain() {
