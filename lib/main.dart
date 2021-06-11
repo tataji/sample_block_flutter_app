@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(body:  Center(child: Text("helloo"))),
+      home: Scaffold(body: Center(child: Text("hello"))),
 
     );
     
